@@ -5,6 +5,14 @@ public class DocumentConversionResponse {
     private String convertedText;
     private String message;
 
+    public DocumentConversionResponse(){
+
+    }
+
+    public DocumentConversionResponse(String message){
+        this.message = message;
+    }
+
     public String getConvertedText() {
         return convertedText;
     }
