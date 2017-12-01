@@ -55,3 +55,5 @@ docker stop <containerid>
 }
 ```
 
+###Swagger
+I have added Swagger to the application and can be reached via the url /swagger-ui.html
