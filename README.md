@@ -2,23 +2,23 @@
 
 As the Watson Document Conversion Service will be deprecated, I created a small application which returns plain text from a document, like doc, docx, HTML and pdf
 
-###Build runnable JAR file
+### Build runnable JAR file
 mvn package
 
-###Build docker image file
+### Build docker image file
 mvn package docker:build
 
-####Run in Docker
+#### Run in Docker
 docker run -p 8080:8080 -t elstarit/think-spring-boot
 
-####Stop Docker container
+#### Stop Docker container
 docker ps
 
-####Will give you a container id and run
+#### Will give you a container id and run
 
 docker stop <containerid>
 
-###Endpoints
+### Endpoints
 **Url**: /api/convert-to-plain-text
 
 **Method**: POST
@@ -55,5 +55,5 @@ docker stop <containerid>
 }
 ```
 
-###Swagger
+### Swagger
 I have added Swagger to the application and can be reached via the url /swagger-ui.html
