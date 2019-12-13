@@ -27,7 +27,6 @@ public class SwaggerConfiguration {
     return new ApiInfoBuilder()
       .title("Document Conversion API")
       .description("To convert any document to plain text")
-      .contact("Frank van der Linden | elstar IT")
       .license("Apache License Version 2.0")
       .version("2.0")
       .build();

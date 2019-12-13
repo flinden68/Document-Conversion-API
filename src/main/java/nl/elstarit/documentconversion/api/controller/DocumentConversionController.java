@@ -41,19 +41,22 @@ public class DocumentConversionController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(method = RequestMethod.POST, value = "/convert-to-plain-text", produces = "application/json")
-    public ResponseEntity<DocumentConversionResponse> covertFileToPlainText(@RequestParam("file") MultipartFile file){
+    public ResponseEntity<Object> covertFileToPlainText(@RequestParam("file") MultipartFile file){
         DocumentConversionResponse documentConversionResponse = null;
         try{
             if(file != null ) {
                 InputStream stream = new BufferedInputStream(file.getInputStream());
                 documentConversionResponse = convert(stream);
             }else{
-                documentConversionResponse = new DocumentConversionResponse("No file found in request");
+                documentConversionResponse = DocumentConversionResponse
+                  .builder()
+                  .convertedText("No file found in request")
+                  .build();
             }
         }catch(Exception e){
             LOG.error("Error on Document Conversion API: {}", e.getMessage());
         }
-        return new ResponseEntity<DocumentConversionResponse>(documentConversionResponse, HttpStatus.OK);
+        return new ResponseEntity<>(documentConversionResponse, HttpStatus.OK);
     }
 
     @ApiOperation(value = "covertBase64EncodedDataToPlainText", nickname = "covertBase64EncodedDataToPlainText", notes="converts the uploaded base64 encoded data to plain text")
@@ -73,7 +76,10 @@ public class DocumentConversionController {
                 InputStream stream = new ByteArrayInputStream(Base64.decodeBase64(request.getData()));
                 documentConversionResponse = convert(stream);
             }else{
-                documentConversionResponse = new DocumentConversionResponse("No data found in request");
+                documentConversionResponse = DocumentConversionResponse
+                  .builder()
+                  .convertedText("No data found in request")
+                  .build();
             }
         }catch(Exception e){
             LOG.error("Error on Document Conversion API: {}", e.getMessage());
@@ -88,7 +94,7 @@ public class DocumentConversionController {
         AutoDetectParser parser = new AutoDetectParser();
         Metadata metadata = new Metadata();
         ParseContext context = new ParseContext();
-        DocumentConversionResponse documentConversionResponse = new DocumentConversionResponse();
+        DocumentConversionResponse documentConversionResponse = DocumentConversionResponse.builder().build();
         try{
             parser.parse(stream, handler, metadata, context);
             documentConversionResponse.setConvertedText(handler.toString());
