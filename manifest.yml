@@ -1,0 +1,7 @@
+applications:
+  - name: document-conversion-api
+    instances: 1
+    memory: 768M
+    disk_quota: 512M
+    path: target/document-conversion-api.jar
+    host: document-conversion-api
