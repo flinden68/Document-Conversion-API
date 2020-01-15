@@ -57,3 +57,7 @@ docker stop <containerid>
 
 ### Swagger
 I have added Swagger to the application and can be reached via the url /swagger-ui.html
+
+### Push to IBM Cloud
+cf login -a https://api.us-south.cf.cloud.ibm.com
+cf push document-conversion-api-serverless
